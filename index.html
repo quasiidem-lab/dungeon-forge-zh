@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#07080d" />
     <meta name="description" content="A deterministic procedural dungeon generator you can watch build itself, room by room. Scatter → separate → Delaunay → MST + loops → carve → theme, rendered live with Three.js." />
-    <title>Dungeon Forge — Procedural Dungeon Generator</title>
+    <title>地城鍛造廠 — 程序化地城產生器</title>
 
     <meta name="author" content="Majid Manzarpour" />
     <link rel="author" href="https://x.com/majidmanzarpour" />
@@ -32,91 +32,91 @@
   <body>
     <!-- control + telemetry panel -->
     <div id="panel">
-      <button id="collapse" aria-label="Collapse panel" title="Collapse">–</button>
+      <button id="collapse" aria-label="收合面板" title="收合">–</button>
       <div class="head">
-        <div class="brand"><span>DUNGEON&nbsp;FORGE</span><span>procgen&nbsp;core</span></div>
+        <div class="brand"><span>地城鍛造廠</span><span>程序化核心</span></div>
         <h1 id="dname">—</h1>
-        <div id="dsub">forging…</div>
+        <div id="dsub">鍛造中…</div>
       </div>
 
-      <ul class="pipe" id="pipe" aria-label="Generation pipeline">
-        <li>SCATTER</li><li>SEPARATE</li><li>DELAUNAY</li><li>MST+LOOPS</li><li>CARVE</li><li>THEME</li>
+      <ul class="pipe" id="pipe" aria-label="產生流程">
+        <li>撒點</li><li>推開</li><li>三角化</li><li>連通+迴路</li><li>雕刻</li><li>主題</li>
       </ul>
 
       <div class="sec">
         <div class="row">
-          <label style="flex:1"><span class="lab"><span>SEED</span></span>
+          <label style="flex:1"><span class="lab"><span>種子</span></span>
             <div class="row">
-              <input id="seed" type="number" value="1337" aria-label="Seed">
-              <button class="btn" id="dice" title="Random seed" aria-label="Random seed">⚄</button>
+              <input id="seed" type="number" value="1337" aria-label="種子">
+              <button class="btn" id="dice" title="隨機種子" aria-label="隨機種子">⚄</button>
             </div>
           </label>
         </div>
-        <button class="btn primary" id="forge" style="width:100%;margin-top:10px">FORGE&nbsp;DUNGEON</button>
+        <button class="btn primary" id="forge" style="width:100%;margin-top:10px">鍛造地城</button>
       </div>
 
       <div class="sec">
-        <span class="lab"><span>THEME</span><b id="vTheme">AUTO</b></span>
+        <span class="lab"><span>主題</span><b id="vTheme">自動</b></span>
         <div class="chips" id="chips">
-          <button class="chip on" data-t="auto">AUTO</button>
-          <button class="chip" data-t="ancient">ANCIENT</button>
-          <button class="chip" data-t="molten">MOLTEN</button>
-          <button class="chip" data-t="frost">FROST</button>
-          <button class="chip" data-t="grim">GRIM</button>
-          <button class="chip" data-t="verdant">VERDANT</button>
+          <button class="chip on" data-t="auto">自動</button>
+          <button class="chip" data-t="ancient">遠古</button>
+          <button class="chip" data-t="molten">熔火</button>
+          <button class="chip" data-t="frost">霜寒</button>
+          <button class="chip" data-t="grim">陰森</button>
+          <button class="chip" data-t="verdant">蒼翠</button>
         </div>
       </div>
 
       <div class="sec">
-        <span class="lab"><span>OBJECTS</span><span style="color:#4a4f61">tap to toggle</span></span>
+        <span class="lab"><span>物件</span><span style="color:#4a4f61">點擊切換</span></span>
         <div class="chips" id="objchips">
-          <button class="chip on" data-o="props" aria-pressed="true">PROPS</button>
-          <button class="chip on" data-o="torches" aria-pressed="true">TORCHES</button>
-          <button class="chip on" data-o="particles" aria-pressed="true">PARTICLES</button>
-          <button class="chip on" data-o="liquids" aria-pressed="true">LIQUIDS</button>
-          <button class="chip on" data-o="lights" aria-pressed="true">LIGHTS</button>
+          <button class="chip on" data-o="props" aria-pressed="true">道具</button>
+          <button class="chip on" data-o="torches" aria-pressed="true">火把</button>
+          <button class="chip on" data-o="particles" aria-pressed="true">粒子</button>
+          <button class="chip on" data-o="liquids" aria-pressed="true">液體</button>
+          <button class="chip on" data-o="lights" aria-pressed="true">燈光</button>
         </div>
       </div>
 
       <div class="sec">
-        <label class="sl"><span class="lab"><span>ROOMS</span><b id="vRooms">42</b></span>
-          <input type="range" id="rooms" min="12" max="80" value="42" aria-label="Room count"></label>
-        <label class="sl"><span class="lab"><span>LOOPINESS</span><b id="vLoops">15%</b></span>
-          <input type="range" id="loops" min="0" max="40" value="15" aria-label="Loop chance"></label>
-        <label class="sl"><span class="lab"><span>DECOR&nbsp;DENSITY</span><b id="vDecor">60%</b></span>
-          <input type="range" id="decor" min="0" max="100" value="60" aria-label="Decoration density"></label>
+        <label class="sl"><span class="lab"><span>房間數</span><b id="vRooms">42</b></span>
+          <input type="range" id="rooms" min="12" max="80" value="42" aria-label="房間數"></label>
+        <label class="sl"><span class="lab"><span>迴路程度</span><b id="vLoops">15%</b></span>
+          <input type="range" id="loops" min="0" max="40" value="15" aria-label="迴路機率"></label>
+        <label class="sl"><span class="lab"><span>裝飾密度</span><b id="vDecor">60%</b></span>
+          <input type="range" id="decor" min="0" max="100" value="60" aria-label="裝飾密度"></label>
       </div>
 
       <div class="sec togs">
-        <label class="tog"><input type="checkbox" id="tGraph"> Graph overlay <span class="key">G</span></label>
-        <label class="tog"><input type="checkbox" id="tHeat"> Difficulty heatmap <span class="key">H</span></label>
-        <label class="tog"><input type="checkbox" id="tAnim" checked> Animate build <span class="key">SPACE&nbsp;skips</span></label>
-        <label class="tog"><input type="checkbox" id="tPost" checked> Post FX <span class="key">P</span></label>
+        <label class="tog"><input type="checkbox" id="tGraph"> 連通圖疊層 <span class="key">G</span></label>
+        <label class="tog"><input type="checkbox" id="tHeat"> 難度熱區圖 <span class="key">H</span></label>
+        <label class="tog"><input type="checkbox" id="tAnim" checked> 動畫演示 <span class="key">空白鍵跳過</span></label>
+        <label class="tog"><input type="checkbox" id="tPost" checked> 後製特效 <span class="key">P</span></label>
       </div>
 
-      <div class="sec legend" aria-label="Room type legend">
-        <span class="lg"><span class="dot" style="background:var(--teal)"></span>Entrance</span>
-        <span class="lg"><span class="dot" style="background:#8f95a3"></span>Combat</span>
-        <span class="lg"><span class="dot" style="background:var(--violet)"></span>Elite</span>
-        <span class="lg"><span class="dot" style="background:var(--gold)"></span>Treasure</span>
-        <span class="lg"><span class="dot" style="background:var(--blue)"></span>Shrine</span>
-        <span class="lg"><span class="dot" style="background:var(--blood)"></span>Boss</span>
+      <div class="sec legend" aria-label="房間類型圖例">
+        <span class="lg"><span class="dot" style="background:var(--teal)"></span>入口</span>
+        <span class="lg"><span class="dot" style="background:#8f95a3"></span>戰鬥</span>
+        <span class="lg"><span class="dot" style="background:var(--violet)"></span>精英</span>
+        <span class="lg"><span class="dot" style="background:var(--gold)"></span>寶藏</span>
+        <span class="lg"><span class="dot" style="background:var(--blue)"></span>神龕</span>
+        <span class="lg"><span class="dot" style="background:var(--blood)"></span>首領</span>
       </div>
 
       <div class="sec stats">
-        <div class="st"><i>ROOMS</i><b id="sRooms">—</b></div>
-        <div class="st"><i>LINKS·LOOPS</i><b id="sEdges">—</b></div>
-        <div class="st"><i>CRIT&nbsp;PATH</i><b id="sCrit">—</b></div>
-        <div class="st"><i>FLOOR&nbsp;TILES</i><b id="sTiles">—</b></div>
-        <div class="st"><i>LIGHTS</i><b id="sLights">—</b></div>
-        <div class="st"><i>GEN&nbsp;TIME</i><b id="sMs" class="hi">—</b></div>
-        <div class="st"><i>DRAW&nbsp;CALLS</i><b id="sCalls">—</b></div>
-        <div class="st"><i>TRIANGLES</i><b id="sTris">—</b></div>
+        <div class="st"><i>房間數</i><b id="sRooms">—</b></div>
+        <div class="st"><i>連結·迴路</i><b id="sEdges">—</b></div>
+        <div class="st"><i>關鍵路徑</i><b id="sCrit">—</b></div>
+        <div class="st"><i>地板格數</i><b id="sTiles">—</b></div>
+        <div class="st"><i>光源數</i><b id="sLights">—</b></div>
+        <div class="st"><i>產生耗時</i><b id="sMs" class="hi">—</b></div>
+        <div class="st"><i>繪製呼叫</i><b id="sCalls">—</b></div>
+        <div class="st"><i>三角面數</i><b id="sTris">—</b></div>
         <div class="st"><i>FPS</i><b id="sFps">—</b></div>
       </div>
     </div>
 
-    <div id="hints"><b>drag</b> pan · <b>wheel</b> zoom · <b>shift-drag</b> orbit · <b>R</b> reforge · <b>T</b> theme · <b>G</b> graph · <b>H</b> heat · <b>P</b> post · <b>space</b> skip</div>
+    <div id="hints"><b>左鍵拖曳</b> 平移 · <b>滾輪</b> 縮放 · <b>右鍵拖曳</b> 轉視角 · <b>R</b> 重新鍛造 · <b>T</b> 主題 · <b>G</b> 連通圖 · <b>H</b> 熱區 · <b>P</b> 後製 · <b>空白鍵</b> 跳過</div>
 
     <script type="module" src="./src/main.js"></script>
   </body>

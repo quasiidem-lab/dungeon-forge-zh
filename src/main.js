@@ -54,7 +54,7 @@ const TINT = { entrance:0x3fd0bb, combat:0x8f95a3, elite:0x9b6cf0, treasure:0xd9
    and name-generator word pools. Everything downstream is data-driven. */
 const THEMES = {
   ancient: {
-    label:'ANCIENT', accent:'#e8973f',
+    label:'遠古', accent:'#e8973f',
     bg:0x07080d, fog:0x07080d, fogD:0.0021,
     hemi:[0x2e3a52, 0x0a0b10, 0.55], dir:[0xffe8c8, 0.85],
     floor:0x8a8f9c, corridor:0x6d7380, wall:0x5c626e, cap:0x757b88,
@@ -62,11 +62,11 @@ const THEMES = {
     flame:0xffa640, flameCore:0xfff3c8, torchLight:[0xff8c3a, 1.5, 9.5],
     cloth:0x7d2c26,
     pools:null, particles:{kind:0, color:0xaab4cc, n:110},
-    nameA:['Sunken','Forgotten','Silent','Hollow','Elder','Broken','Nameless','Fallen'],
-    nameB:['Halls','Vaults','Catacombs','Depths','Sanctum','Undercroft','Barrows','Reliquary']
+    nameA:['沉沒','遺忘','寂靜','空洞','古老','破碎','無名','墜落'],
+    nameB:['大廳','地窖','地下墓穴','深淵','聖所','地下室','塚墓','聖髑室']
   },
   molten: {
-    label:'MOLTEN', accent:'#ff8642',
+    label:'熔火', accent:'#ff8642',
     bg:0x0c0605, fog:0x1a0b04, fogD:0.0028,
     hemi:[0x6b3419, 0x160503, 0.55], dir:[0xffd9b0, 0.5],
     floor:0x7a685c, corridor:0x614f44, wall:0x503e34, cap:0x6b5546,
@@ -75,11 +75,11 @@ const THEMES = {
     cloth:0x7d2416,
     pools:{mode:0, colA:0x2b0d05, colB:0xff5a1f, glow:1.55, amount:0.16, pits:2},
     particles:{kind:1, color:0xffa050, n:240},
-    nameA:['Molten','Ashen','Cindered','Smouldering','Charred','Burning','Ember','Scorched'],
-    nameB:['Forges','Furnaces','Calderas','Foundry','Kilns','Vents','Crucible','Depths']
+    nameA:['熔融','灰燼','餘燼','悶燒','焦黑','燃燒','火星','灼燒'],
+    nameB:['鍛爐','熔爐','火山口','鑄造廠','窯坑','噴氣孔','坩堝','深淵']
   },
   frost: {
-    label:'FROST', accent:'#7fd4ff',
+    label:'霜寒', accent:'#7fd4ff',
     bg:0x060a12, fog:0x0b1522, fogD:0.0024,
     hemi:[0x3a5a80, 0x0a0e18, 0.5], dir:[0xcfe4ff, 0.82],
     floor:0x93a0b2, corridor:0x78848f, wall:0x60708a, cap:0x8194ac,
@@ -88,11 +88,11 @@ const THEMES = {
     cloth:0x2b4d70,
     pools:{mode:1, colA:0x4a86c0, colB:0xbfe4ff, glow:0.55, amount:0},
     lakes:true, icicles:true, particles:{kind:2, color:0xdff0ff, n:260},
-    nameA:['Frozen','Rimebound','Glacial','Howling','Pale','Shivering','Wintered','Whitelocked'],
-    nameB:['Crypts','Caverns','Hollows','Galleries','Sepulchre','Warrens','Reaches','Throat']
+    nameA:['凍結','霜縛','冰川','呼嘯','蒼白','顫慄','寒冬','雪封'],
+    nameB:['墓室','洞窟','空穴','迴廊','石棺塚','迷巢','邊境','咽喉']
   },
   grim: {
-    label:'GRIM', accent:'#9fe66a',
+    label:'陰森', accent:'#9fe66a',
     bg:0x070a07, fog:0x0a130a, fogD:0.0030,
     hemi:[0x2c4030, 0x070a06, 0.52], dir:[0xbfd8b0, 0.45],
     floor:0x7c8276, corridor:0x62685c, wall:0x4f5549, cap:0x666c5e,
@@ -101,11 +101,11 @@ const THEMES = {
     cloth:0x33461f,
     pools:{mode:3, colA:0x0a1207, colB:0x41602c, glow:0.6, amount:0.05, pits:1},
     graveyards:true, bones:true, particles:{kind:3, color:0x9fe66a, n:150},
-    nameA:['Blighted','Weeping','Rotting','Cursed','Umbral','Plagued','Mournful','Grim'],
-    nameB:['Necropolis','Ossuary','Tombs','Charnels','Graves','Catacombs','Morgue','Crypts']
+    nameA:['枯萎','哭泣','腐爛','詛咒','幽影','瘟疫','哀悼','陰森'],
+    nameB:['死者之城','藏骨堂','墳塋','停屍間','墓地','地下墓穴','屍窖','墓室']
   },
   verdant: {
-    label:'VERDANT', accent:'#59d68f',
+    label:'蒼翠', accent:'#59d68f',
     bg:0x060c09, fog:0x091510, fogD:0.0023,
     hemi:[0x2f5a46, 0x08120c, 0.6], dir:[0xd8f0c8, 0.8],
     floor:0x848e7e, corridor:0x6a7560, wall:0x556050, cap:0x6e7a66,
@@ -114,17 +114,23 @@ const THEMES = {
     cloth:0x1f5038,
     pools:{mode:2, colA:0x0c3532, colB:0x2fa38a, glow:0.6, amount:0.05, pits:1},
     roots:true, shafts:true, particles:{kind:4, color:0x8fe6b8, n:200},
-    nameA:['Verdant','Overgrown','Sporebound','Tangled','Mossgrown','Waking','Feral','Blooming'],
-    nameB:['Gardens','Warrens','Roots','Conservatory','Hollows','Groves','Cisterns','Arbors']
+    nameA:['蒼翠','蔓生','孢縛','糾纏','苔生','甦醒','野性','綻放'],
+    nameB:['庭園','迷巢','根脈','溫室','空穴','樹叢','蓄水池','綠廊']
   }
 };
 const THEME_KEYS = Object.keys(THEMES);
 
 /* ---------------- name generator ---------------- */
+/* Chinese word order differs from the English original ("The <adj> <noun> of
+   <name>"): the possessor leads and no article is used, so this composes as
+   <name>\u7684<adj><noun> \u2014 e.g. \u746a\u723e\u6208\u65af\u7684\u6c89\u6c92\u5730\u7a96. The transliteration pools C/D
+   stay two-syllable so the generated proper noun reads as a name, not a word.
+   Draw order is unchanged, so a given seed still maps to the same picks. */
 function dungeonName(rng, th){
-  const C=['Mal','Vor','Ash','Ker','Ul','Dra','Noth','Zar','Bel','Mor','Gol','Ith'];
-  const D=['goth','ath','ruk','esh','mir','gul','dan','oth','ek','ash','uzek','arim'];
-  return 'The ' + rng.pick(th.nameA) + ' ' + rng.pick(th.nameB) + ' of ' + rng.pick(C) + '\u2019' + rng.pick(D);
+  const C=['\u746a\u723e','\u6c83\u723e','\u827e\u8a31','\u51f1\u723e','\u70cf\u723e','\u5fb7\u62c9','\u8afe\u65af','\u85a9\u723e','\u8c9d\u723e','\u83ab\u723e','\u6208\u723e','\u4f0a\u65af'];
+  const D=['\u6208\u65af','\u963f\u65af','\u9b6f\u514b','\u827e\u8a31','\u5f4c\u723e','\u53e4\u723e','\u4e39\u6069','\u5967\u65af','\u827e\u514b','\u4e9e\u4ec0','\u70cf\u6fa4','\u963f\u6797'];
+  const a = rng.pick(th.nameA), b = rng.pick(th.nameB);
+  return rng.pick(C) + rng.pick(D) + '\u7684' + a + b;
 }
 
 /* ---------------- Delaunay (Bowyer–Watson) ---------------- */
@@ -787,6 +793,12 @@ scene.fog = new THREE.FogExp2(canvasBg, 0.002);
 const BASE_HALF = 55;
 let aspect = innerWidth/innerHeight;
 const cam = new THREE.OrthographicCamera(-BASE_HALF*aspect, BASE_HALF*aspect, BASE_HALF, -BASE_HALF, -400, 800);
+/* Orbit pitch limits. Stock was [0.32, 1.15] — locked to the isometric
+   three-quarter look. Opened up so the camera can reach a near-vertical
+   top-down view for battle-map use. The ceiling stops just short of PI/2:
+   at exactly vertical the forward vector is parallel to lookAt's up vector,
+   the basis degenerates and the view snaps to an arbitrary yaw. */
+const PITCH_MIN = 0.10, PITCH_MAX = Math.PI/2 - 0.02;
 let yaw = Math.PI/4, pitch = 0.64;
 const camTarget = new THREE.Vector3(0,0,0);
 function updateCam(){
@@ -2083,17 +2095,17 @@ function forge(animate){
   buildScene(d);
   applyObjectVis();
   const TH = THEMES[themeKey];
-  el.vTheme.textContent = themeSel==='auto' ? 'AUTO \u00b7 '+TH.label : TH.label;
+  el.vTheme.textContent = themeSel==='auto' ? '\u81ea\u52d5 \u00b7 '+TH.label : TH.label;
   el.dname.textContent = d.name;
   const st = d.stats;
-  el.dsub.innerHTML = 'seed ' + d.seed +
-    ' \u00b7 <span style="color:var(--ember)">' + TH.label.toLowerCase() + '</span>' +
-    ' \u00b7 floor ' + ((d.seed % 9) + 2) +
-    ' \u00b7 ' + (d.valid ? '<span class="ok">connected \u2713</span>' : '<span class="bad">unresolved</span>') +
-    (st.attempts > 1 ? ' \u00b7 reroll \u00d7' + (st.attempts-1) : '');
+  el.dsub.innerHTML = '\u7a2e\u5b50 ' + d.seed +
+    ' \u00b7 <span style="color:var(--ember)">' + TH.label + '</span>' +
+    ' \u00b7 \u7b2c ' + ((d.seed % 9) + 2) + ' \u5c64' +
+    ' \u00b7 ' + (d.valid ? '<span class="ok">\u5df2\u9023\u901a \u2713</span>' : '<span class="bad">\u672a\u89e3\u51fa</span>') +
+    (st.attempts > 1 ? ' \u00b7 \u91cd\u64f2 \u00d7' + (st.attempts-1) : '');
   el.sRooms.textContent  = st.rooms;
   el.sEdges.textContent  = st.edges + ' \u00b7 ' + st.loops;
-  el.sCrit.textContent   = st.critLen + ' rm';
+  el.sCrit.textContent   = st.critLen + ' 間';
   el.sTiles.textContent  = st.floorTiles;
   el.sLights.textContent = lights.length;
   el.sMs.textContent     = st.genMs.toFixed(1) + 'ms';
@@ -2190,7 +2202,7 @@ cnv.addEventListener('pointermove', e=>{
   lastX = e.clientX; lastY = e.clientY;
   if(orbiting){
     yaw -= dx*0.005;
-    pitch = Math.min(1.15, Math.max(0.32, pitch + dy*0.005));
+    pitch = Math.min(PITCH_MAX, Math.max(PITCH_MIN, pitch + dy*0.005));
   } else {
     const wpp = (2*BASE_HALF/cam.zoom)/cnv.clientHeight;
     const fx = Math.sin(yaw), fz = Math.cos(yaw);
